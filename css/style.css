@@ -38,9 +38,26 @@ img {
 .inner {
   display: block;
   position: relative;
-  width: 1280px;
+  max-width: 1280px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 1280px) {
+  .inner {
+    max-width: 1024px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .inner {
+    max-width: 760px;
+  }
+}
+@media screen and (max-width: 760px) {
+  .inner {
+    max-width: 100%;
+  }
+}
+
 .clearfix::after {
   display: block;
   position: relative;
@@ -152,25 +169,26 @@ img {
   height: 11px;
   background: url("../images/icon_linkArrow.svg") no-repeat center;
 }
-.wrap{}
-.fix-banner{
+.wrap {
+}
+.fix-banner {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  z-index: 9999;  
+  z-index: 9999;
   text-align: center;
 }
-.fix-banner a{
+.fix-banner a {
   display: block;
 }
-.gotop{
+.gotop {
   display: inline-block;
   width: 38px;
   height: 38px;
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.15);
   background: #fff url("../images/btn_topArrow.svg") no-repeat center;
-  box-shadow: 0 0 0.5rem rgba(0,0,0,.16);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.16);
   font-size: 0;
   margin-top: 10px;
 }
@@ -188,6 +206,12 @@ img {
 .header-up {
 }
 .header-left {
+  position: relative;
+  /* 자식들이 모두.. absolute 라서. */
+  /*  width, height 준다 */
+  width: calc(118px + 455px + 20px);
+  height: 50px;
+
   float: left;
 }
 .logo {
@@ -209,14 +233,15 @@ img {
   margin-right: 20px;
 }
 .search {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 455px;
   height: 50px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   overflow: hidden;
   padding: 0 15px;
-  float: left;
 }
 .search-text {
   width: calc(100% - 25px);
@@ -254,8 +279,11 @@ img {
   cursor: pointer;
 }
 .header-right {
-  /* position: relative; */
+  position: relative;
   float: right;
+}
+.mb-mypage{
+  display: none;
 }
 .member-list {
   margin-top: 18px;
@@ -321,7 +349,7 @@ img {
 .mypage-list li a {
   /* 줄내림 없이 한줄로 배치 */
   white-space: nowrap;
-  font-size: 1.4rem;
+  font-size: 14px;
 }
 .mypage-list li a b {
 }
@@ -334,14 +362,14 @@ img {
 }
 .service-list li {
   float: left;
-  padding-right: 2.3rem;
+  padding-right: 23px;
 }
 .service-list li:last-child {
   padding-right: 0;
-  margin-right: 1.5rem;
+  margin-right: 15px;
 }
 .service-list li a {
-  font-size: 1.6rem;
+  font-size: 16px;
   color: #333;
   font-weight: 600;
   line-height: 30px;
@@ -361,7 +389,7 @@ img {
 .service-menu li a {
   display: inline-block;
   position: relative;
-  font-size: 1.6rem;
+  font-size: 16px;
   font-weight: 600;
   color: #333;
   padding: 0 12px;
@@ -377,6 +405,70 @@ img {
   height: 16px;
   background: rgba(0, 0, 0, 0.2);
 }
+
+@media screen and (max-width: 1024px) {
+  .header {
+    border-bottom: 8px solid #f0f4f4;
+  }
+  .header .inner {
+    padding-top: 15px;
+    height: 230px;
+  }
+  .header-up {
+  }
+  .header-left {
+    width: 100%;
+  }
+  .search {
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .logo {
+    width: 77px;
+    height: 18px;
+    margin-top: 6px;
+    margin-left: 15px;
+  }
+  .member-list {
+    display: none;
+  }
+  .mb-mypage{
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 15px;
+  }
+  .header-down {
+    text-align: center;
+    margin: 0;
+  }
+  .service-list {
+    display: inline-block;
+    float: none;
+    margin-top: -1px;
+  }
+  .service-list li {
+    padding-right: 20px;
+  }
+  .service-list li:last-child {
+    margin-right: 0;
+  }
+  .service-list li a {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .service-list li a img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+  }
+  .service-menu {
+    display: none;
+  }
+}
+
 /* 추천 이벤트 */
 .promotion {
   padding-top: 30px;
@@ -559,7 +651,7 @@ img {
 .ticket .section-slide {
   height: 540px;
 }
-.ticket .section-slide .sw-bt{
+.ticket .section-slide .sw-bt {
   top: 40%;
 }
 .sw-ticket {
@@ -810,7 +902,7 @@ img {
 .books .section-slide {
   height: 400px;
 }
-.books .section-slide .sw-bt{
+.books .section-slide .sw-bt {
   top: 43%;
 }
 .sw-books {
