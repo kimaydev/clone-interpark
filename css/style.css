@@ -1,0 +1,1027 @@
+@charset "utf-8";
+@import url("font.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline-style: none;
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  /* font-size: 13px; */
+  font-size: 1.3rem;
+  line-height: 1;
+  color: #000;
+
+  letter-spacing: -0.64px;
+  word-break: keep-all;
+}
+ul li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+img {
+  vertical-align: middle;
+}
+
+/* 공통 설정 시작 */
+.inner {
+  display: block;
+  position: relative;
+  width: 1280px;
+  margin: 0 auto;
+}
+.clearfix::after {
+  display: block;
+  position: relative;
+  width: 100%;
+  content: "";
+  clear: both;
+}
+/* swiper 버튼 */
+.sw-bt {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.13);
+  font-size: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+.sw-bt::before {
+  display: block;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 4px);
+  content: "";
+  width: 8px;
+  height: 16px;
+  background: url("../images/slider_arrow.svg") no-repeat center;
+}
+.sw-next {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+.sw-prev {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+.sw-prev::before {
+  /*
+    transform : 좌표 및 크기를 변경하지 않고 눈에 보이는 것들만 변경한다. 
+    transform: translate(X축, Y축);
+  */
+  transform: scaleX(-100%);
+}
+/* section 내용 구조 */
+.section-top {
+  text-align: center;
+}
+.section-top > h2 {
+  font-size: 28px;
+  line-height: 33px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.section-top > p {
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.section-top .btns {
+  margin: 25px 0;
+  /* inline-block은 HTML 코드의 Enter도 글자로 인식하여 의도하지 않은 여백이 생기게 된다. */
+  font-size: 0;
+}
+.section-top .btns a {
+  display: inline-block;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 20px;
+  line-height: 42px;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  margin-right: 6px;
+}
+.section-top .btns a:last-child {
+  margin-right: 0;
+}
+.btns-active {
+  background: #111 !important;
+  color: #fff !important;
+}
+.section-slide {
+  position: relative;
+  margin-bottom: 20px;
+}
+.section-bottom {
+  text-align: center;
+}
+.bt-link-shop {
+  /* 만약 block였으면 width값과 margin: 0 auto;가 추가로 들어가게 된다. */
+  display: inline-block;
+  font-size: 16px;
+  line-height: 56px;
+  padding: 0 40px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 28px;
+  color: #333;
+  font-weight: 700;
+}
+.bt-link-shop::after {
+  display: inline-block;
+  position: relative;
+  content: "";
+  margin-left: 7px;
+  width: 7px;
+  height: 11px;
+  background: url("../images/icon_linkArrow.svg") no-repeat center;
+}
+.wrap{}
+.fix-banner{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;  
+  text-align: center;
+}
+.fix-banner a{
+  display: block;
+}
+.gotop{
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff url("../images/btn_topArrow.svg") no-repeat center;
+  box-shadow: 0 0 0.5rem rgba(0,0,0,.16);
+  font-size: 0;
+  margin-top: 10px;
+}
+/* 상단 */
+.header {
+  position: relative;
+  z-index: 99999;
+  /* border-bottom: 1px solid #ebebeb; */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.header .inner {
+  height: 160px;
+  padding-top: 30px;
+}
+.header-up {
+}
+.header-left {
+  float: left;
+}
+.logo {
+  display: block;
+  width: 118px;
+  height: 50px;
+  /* background: 색상 그림경로; */
+  background: url("../images/logo.svg") no-repeat center;
+  /* 경로 설정에서 ..은 상위 경로로 올라간다는 뜻 */
+  /* 
+    배경에 이미지를 배치할 수 있는 CSS는 기본 값이 있으며, 기본값은 repeat(반복) 이다.
+  */
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+  background-size: contain;
+  /* background-attachment: fixed; */
+  /* 배경이미지를 화면에 고정시켜 스크롤을 움직였을 때 화면이 입체적으로 보임 */
+  float: left;
+  margin-right: 20px;
+}
+.search {
+  position: relative;
+  width: 455px;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  overflow: hidden;
+  padding: 0 15px;
+  float: left;
+}
+.search-text {
+  width: calc(100% - 25px);
+  height: 100%;
+  border: 0;
+  padding-right: 35px;
+  font-size: 1.6rem;
+  font-family: inherit;
+  font-weight: 700;
+}
+.search-text::placeholder {
+  color: #a2a2a2;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.search-bt {
+  width: 17px;
+  height: 17px;
+  background: url("../images/btn_search.svg") no-repeat center;
+  border: 0;
+  cursor: pointer;
+  /* inline속성(또는 inline-block)이기 때문에 vertical-align 속성이 적용된다. */
+  vertical-align: -3px;
+}
+.search-reset {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: url("../images/btn_searchDelete.svg") no-repeat center;
+  border: 0;
+  font-size: 0;
+  cursor: pointer;
+}
+.header-right {
+  /* position: relative; */
+  float: right;
+}
+.member-list {
+  margin-top: 18px;
+  /* padding-top: 18px; */
+  /* position: absolute; */
+  /* top: 17px; */
+  /* line-height: 50px; */
+  /* line-height는 inline 또는 inline-block  */
+}
+.member-list > li {
+  position: relative;
+  float: left;
+  margin-right: 2rem;
+}
+.member-list > li:last-child {
+  margin-right: 0;
+}
+.member-list > li > a {
+  font-size: 1.5rem;
+  color: #111;
+  font-weight: 500;
+}
+.mypage-bt:hover .mypage {
+  display: block;
+}
+.icon-arrow {
+  /* display: inline-block; */
+  /* inline 세로 위치 정렬 */
+  /* vertical-align: 2px; */
+  /* margin-left: 5px; */
+}
+.icon-arrow::after {
+  display: inline-block;
+  position: relative;
+  content: "";
+  width: 8px;
+  height: 5px;
+  background: url("../images/arrow_pc.svg") no-repeat center;
+  vertical-align: 2px;
+  margin-left: 5px;
+}
+.mypage {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: #fff;
+  padding: 20px;
+  border-radius: 13px;
+  box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+}
+.mypage-list {
+}
+.mypage-list li {
+  margin: 15px 0;
+}
+.mypage-list li:first-child {
+  margin-top: 0;
+}
+.mypage-list li:last-child {
+  margin-bottom: 0;
+}
+.mypage-list li a {
+  /* 줄내림 없이 한줄로 배치 */
+  white-space: nowrap;
+  font-size: 1.4rem;
+}
+.mypage-list li a b {
+}
+
+.header-down {
+  margin: 30px 0;
+}
+.service-list {
+  float: left;
+}
+.service-list li {
+  float: left;
+  padding-right: 2.3rem;
+}
+.service-list li:last-child {
+  padding-right: 0;
+  margin-right: 1.5rem;
+}
+.service-list li a {
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 30px;
+}
+.service-list li a img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.service-menu {
+  display: block;
+  float: left;
+}
+.service-menu li {
+  float: left;
+}
+.service-menu li a {
+  display: inline-block;
+  position: relative;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  padding: 0 12px;
+  line-height: 30px;
+}
+.service-menu li a::before {
+  display: block;
+  position: absolute;
+  top: calc(50% - 16px / 2);
+  left: 0;
+  content: "";
+  width: 1px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+/* 추천 이벤트 */
+.promotion {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.promotion .inner {
+  height: 345px;
+}
+.promotion-slide {
+  height: 100%;
+}
+.sw-promotion {
+}
+.sw-promotion .swiper-slide a {
+  display: inline-block;
+  border-radius: 13px;
+  overflow: hidden;
+}
+.sw-promotion .swiper-slide a img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* 쇼핑추천 */
+.shopping {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.shopping .section-slide {
+  height: 405px;
+}
+.sw-shopping {
+  height: 100%;
+}
+.good {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: #eee;
+  text-align: center;
+  overflow: hidden;
+}
+.good > img {
+  width: 100%;
+  /* 배경색이 mix blend 되어 색상이 섞인다 */
+  /* multiply는 흰색을 투명하게 한다. */
+  /* 자주 사용하지는 않음 */
+  /* CSS는 포토샵처럼 이미지 블렌드가 가능하다. */
+  mix-blend-mode: multiply;
+}
+.good-info {
+  background: #fff;
+  text-align: left;
+  padding: 20px;
+}
+.good-info-list {
+}
+.good-info-list li {
+}
+.good-info-list li b {
+  font-size: 20px;
+  line-height: 24px;
+  color: #111;
+  font-weight: 700;
+}
+.good-info-list li b span {
+  color: #ef3e43;
+}
+.good-info-list li p {
+  display: -webkit-box;
+  /*
+    내용이 1줄일 수도 있고 2줄 이상으로 들어갈 수 있을 경우에는
+    높이 값을 지정해서 레이아웃 깨지는 현상을 방지한다.
+   */
+  font-size: 15px;
+  line-height: 18px;
+  color: #111;
+  margin-top: 10px;
+
+  /* 
+    내용이 넘치는 경우 끝부분 '...' 처리 
+      1. 기본적으로 높이 값이 있어야 한다.
+      2. 넘치는 영역을 가린다.
+      3. display가 -webkit-box
+      4. text-overflow: ellipsis;
+      5. 아래 코드를 입력한다.
+  */
+  height: 36px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+/* 투어특가 */
+.tour {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.tour .section-slide {
+  height: 355px;
+}
+.sw-tour {
+  height: 100%;
+}
+.tour-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.tour-img {
+  position: relative;
+  width: 100%;
+  height: 245px;
+  overflow: hidden;
+}
+.tour-img img {
+  /* 이미지를 absolute로 영역 중앙에 배치  */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 보이는 부분만 이동 */
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+}
+.tour-info {
+  padding: 20px;
+  background: #fff;
+}
+.tour-info .tour-cate {
+  display: inline-block;
+  position: absolute;
+  top: -39px;
+  left: 0px;
+  background: #4a95ff;
+  font-size: 14px;
+  line-height: 32px;
+  color: #fff;
+  font-weight: 700;
+  padding: 0 10px;
+  border-radius: 3px;
+}
+.tour-info-list {
+}
+.tour-info-list li {
+  position: relative;
+  margin-bottom: 3px;
+}
+.tour-title {
+  /* 1줄 말줄임 스타일 */
+  display: block;
+  font-size: 15px;
+  line-height: 18px;
+  color: #4a95ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tour-place {
+}
+.tour-price {
+  color: #111;
+  font-size: 16px;
+  line-height: 24px;
+}
+.tour-price b {
+  font-size: 20px;
+  font-weight: 700;
+}
+/* 티켓랭킹 */
+.ticket {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.ticket .section-slide {
+  height: 540px;
+}
+.ticket .section-slide .sw-bt{
+  top: 40%;
+}
+.sw-ticket {
+  height: 100%;
+}
+.ticket-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ticket-img {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.ticket-img::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)),
+    linear-gradient(180deg, transparent 68.5%, rgba(0, 0, 0, 0.6));
+}
+.ticket-img img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+.ticket-rank {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  font-size: 70px;
+  color: #fff;
+  font-weight: 700;
+  z-index: 1;
+}
+.ticket-info {
+  padding: 20px 10px;
+  background: #fff;
+}
+.ticket-info-list {
+}
+.ticket-info-list li {
+  margin-bottom: 5px;
+}
+.ticket-info-list li:last-child {
+  margin-bottom: 0;
+}
+.ticket-title {
+  /* 2줄 말줄임 처리 */
+  display: -webkit-box;
+  color: #111;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 700;
+  /* height: 44px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ticket-title b {
+}
+.ticket-hall {
+  display: block;
+  font-size: 15px;
+  line-height: 18px;
+  color: #666;
+  /* 1줄 말줄임 처리 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ticket-date {
+  display: block;
+  font-size: 14px;
+  line-height: 17px;
+  color: #999;
+}
+.ticket-sale {
+  display: inline-block;
+  line-height: 24px;
+  font-size: 11px;
+  padding: 0 8px;
+  color: #ef3e43;
+  border: 1px solid rgba(239, 62, 67, 0.3);
+  border-radius: 3px;
+}
+/* 인터파크 라이브 */
+.live {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.live .section-top {
+  margin-bottom: 25px;
+}
+.live .section-top img {
+  width: 155px;
+}
+.live .section-slide {
+  height: 455px;
+}
+.sw-live {
+  height: 100%;
+}
+.live-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.live-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.live-img img {
+  /* 이미지 너비, 높이 상관 없이 가운데 정렬 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+}
+.live-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+.live-info-top {
+}
+.live-info-cate {
+  display: inline-block;
+  line-height: 33px;
+  font-size: 13px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0 12px;
+  margin-bottom: 10px;
+}
+.live-info-title {
+  display: -webkit-box;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #fff;
+  /* 2줄 이상 초과 시 말줄임표 출력 */
+  height: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.live-info-main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+.live-info-date {
+  font-size: 28px;
+  line-height: 33px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.live-info-time {
+  color: #fff;
+  font-size: 50px;
+  line-height: 60px;
+  font-weight: 700;
+}
+.live-info-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+}
+.live-info-thumb {
+  position: relative;
+  float: left;
+  width: 65px;
+  height: 65px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.live-info-thumb img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+}
+.live-info-desc {
+  float: right;
+  /* 전체 영역에서 thumb 넓이와 마진값을 뺌 */
+  width: calc(100% - 65px - 10px);
+}
+.live-info-desc-title {
+  font-size: 15px;
+  line-height: 18px;
+  color: #fff;
+  margin-top: 8px;
+  /* 1줄 초과 시 말줄임 표시 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.live-info-desc-price {
+  font-size: 16px;
+  color: #fff;
+  margin-top: 8px;
+}
+.live-info-desc-price em {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  font-style: normal;
+  color: #ef3e43;
+}
+.live-info-desc-price b {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+/* 오늘의 도서 */
+.books {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.books .section-slide {
+  height: 400px;
+}
+.books .section-slide .sw-bt{
+  top: 43%;
+}
+.sw-books {
+  height: 100%;
+}
+.books-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.books-img {
+  position: relative;
+  width: 100%;
+  height: 335px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.books-img img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+.books-info {
+  text-align: center;
+}
+.books-info-title {
+  font-size: 15px;
+  line-height: 18px;
+  margin: 8px 0;
+  /* 1줄 초과 시 말줄임표 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.books-info-price {
+  font-size: 16px;
+}
+.books-info-price em {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: normal;
+}
+/* 이벤트 */
+.event {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
+.event .section-top {
+  margin-bottom: 25px;
+}
+.event .section-slide {
+  height: 350px;
+}
+.sw-events {
+  height: 100%;
+}
+.event-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f7f7f7;
+}
+.event-link img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+}
+/* 하단 */
+.footer {
+}
+.footer-menu {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 20px 0;
+}
+.footer-menu .inner {
+}
+.footer-menu-list {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-menu-list > li {
+  position: relative;
+}
+.footer-menu-list > li::after {
+  position: absolute;
+  top: 50%;
+  right: -36px;
+  content: "";
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.3);
+}
+.footer-menu-list > li:last-child::after {
+  display: none;
+}
+.footer-menu-list > li > a {
+  font-size: 13px;
+  line-height: 16px;
+  color: #333;
+  white-space: nowrap;
+}
+.footer-menu-list > li > a strong {
+  font-weight: 700;
+}
+.footer-menu-list > li > a i::before {
+  display: inline-block;
+  position: relative;
+  content: "";
+  width: 8px;
+  height: 6px;
+  background: url("/images/icon_arrow.svg") no-repeat center;
+  margin-left: 4px;
+  vertical-align: 1px;
+}
+.footer-menu-list > li:hover .more-list {
+  display: block;
+}
+.more-list {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: #fff;
+  padding: 17px;
+  border-radius: 8px;
+  box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+}
+.more-list li {
+  margin-bottom: 16px;
+}
+.more-list li:last-child {
+  margin-bottom: 0;
+}
+.more-list li a {
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+}
+.footer-main {
+  padding: 30px 0 55px;
+}
+.footer-main-left {
+  float: left;
+  width: 50%;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.footer-main-right {
+  float: right;
+  width: 50%;
+  padding-left: 30px;
+}
+.company-name {
+  float: left;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin-right: 10px;
+}
+.company-info {
+  float: left;
+  width: 80%;
+}
+.company-info li {
+  font-size: 12px;
+  line-height: 17px;
+  color: #666;
+  margin-bottom: 15px;
+}
+.company-info li:last-child {
+  margin-bottom: 0;
+}
+.company-info li span {
+}
+.company-info li span.f-line::after {
+  display: inline-block;
+  position: relative;
+  content: "";
+  width: 1px;
+  height: 10px;
+  background: #b2b2b2;
+  vertical-align: -1px;
+  margin: 0 3px;
+}
+.company-info li a {
+  color: #666;
+}
+.company-info li a.line {
+  color: #4a95ff;
+  text-decoration: underline;
+}
+.company-info li b {
+  color: #111;
+  font-weight: 700;
+}
+.company-info li p {
+  font-size: 11px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.4);
+}
+.copy {
+}
+/* caniuse.com를 통해 확인한다. */
