@@ -275,10 +275,14 @@
                 </div>
               </div>
             </div>
+            <!-- pagination -->
+            <div class="sw-promotion-control">
+              <div class="pagination sw-promotion-pg"></div>
+            </div>
           </div>
         </div>
       </section>
-      <!-- Initialize Swiper -->
+      <!-- promotion Swiper -->
       <script>
         var swiper = new Swiper(".sw-promotion", {
           slidesPerView: 1,
@@ -292,6 +296,10 @@
           navigation: {
             nextEl: ".promotion .sw-next",
             prevEl: ".promotion .sw-prev",
+          },
+          pagination: {
+            el: ".sw-promotion-pg",
+            clickable: true,
           },
           breakpoints: {
             760: {

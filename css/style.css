@@ -528,7 +528,14 @@ img {
   width: 100%;
   height: auto;
 }
-
+.sw-promotion-control {
+  position: relative;
+  display: none;
+  text-align: center;
+}
+.sw-promotion-pg {
+  display: inline-block;
+}
 @media screen and (max-width: 1280px) {
   .promotion .inner {
     height: 275px;
@@ -536,7 +543,7 @@ img {
 }
 @media screen and (max-width: 1024px) {
   .promotion .inner {
-    height: 200px;
+    height: 300px;
     border-bottom: 8px solid #f0f4f4;
   }
   .promotion .section-top {
@@ -545,13 +552,36 @@ img {
   .promotion .sw-bt {
     display: none;
   }
+  .sw-promotion-control {
+    display: block;
+  }
 }
 @media screen and (max-width: 760px) {
   .promotion .inner {
-    height: 190px;
+    height: 290px;
   }
   .sw-promotion {
     width: 50%;
+    min-width: 350px;
+  }
+  .sw-promotion-control {
+    display: block;
+    margin-top: -25px;
+    z-index: 9;
+  }
+  /* swiper.js에서 자동으로 CSS 생성 */
+  .sw-promotion-pg .swiper-pagination-bullet {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0.3;
+    background-color: #fff;
+  }
+  .sw-promotion-pg .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
   }
 }
 /* 쇼핑추천 */
