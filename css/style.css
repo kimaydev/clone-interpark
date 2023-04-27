@@ -105,6 +105,10 @@ img {
   transform: scaleX(-100%);
 }
 /* section 내용 구조 */
+.wrap > section {
+  padding-top: 30px;
+  padding-bottom: 90px;
+}
 .section-top {
   text-align: center;
 }
@@ -169,10 +173,83 @@ img {
   height: 11px;
   background: url("../images/icon_linkArrow.svg") no-repeat center;
 }
+/* 퀵메뉴 */
+.quick-menu {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 99;
+}
+.quick-menu .inner {
+  display: flex;
+  /* 
+  flex는 레이아웃 전용
+  float를 편리하게 활용할 수 있음
+   */
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.quick-menu a {
+}
+/* 플라잉 마이페이지 */
+.fix-mypage {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999999;
+}
+.fix-mypage-main {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.fix-mypage-main .inner {
+  border-radius: 18px 18px 0 0;
+  background: #fff;
+  overflow: hidden;
+  padding: 30px 0;
+  text-align: center;
+}
+.fix-mypage-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.fix-mypage-list {
+  display: inline-block;
+}
+.fix-mypage-list li {
+  float: left;
+  margin-right: 40px;
+}
+.fix-mypage-list li:last-child {
+  margin-right: 0;
+}
+.fix-mypage-list li a {
+  font-size: 14px;
+  color: #666;
+}
+.fix-mypage-list li a img {
+  display: block;
+  width: 48px;
+  margin: 0 auto 8px;
+}
+
 .wrap {
 }
 
 @media screen and (max-width: 1280px) {
+  .wrap > section {
+  }
   .section-top {
   }
   .section-top > h2 {
@@ -181,6 +258,13 @@ img {
   }
 }
 @media screen and (max-width: 1024px) {
+  .wrap > section {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+  .wrap > section:first-of-type {
+    padding-top: 30px;
+  }
   .section-top {
   }
   .section-top > h2 {
@@ -192,8 +276,17 @@ img {
     font-size: 15px;
     line-height: 18px;
   }
+  .quick-menu {
+    display: block;
+  }
+  /* .fix-mypage {
+    display: block;
+  } */
 }
 @media screen and (max-width: 760px) {
+  .wrap > section {
+    padding-bottom: 30px;
+  }
   .section-top {
   }
   .section-top > h2 {
@@ -502,10 +595,6 @@ img {
 }
 
 /* 추천 이벤트 */
-.promotion {
-  padding-top: 30px;
-  padding-bottom: 90px;
-}
 .promotion .inner {
   height: 345px;
 }
@@ -529,8 +618,8 @@ img {
   height: auto;
 }
 .sw-promotion-control {
-  position: relative;
   display: none;
+  position: relative;
   text-align: center;
 }
 .sw-promotion-pg {
@@ -543,7 +632,7 @@ img {
 }
 @media screen and (max-width: 1024px) {
   .promotion .inner {
-    height: 300px;
+    height: 325px;
     border-bottom: 8px solid #f0f4f4;
   }
   .promotion .section-top {
@@ -554,6 +643,7 @@ img {
   }
   .sw-promotion-control {
     display: block;
+    margin-top: 10px;
   }
 }
 @media screen and (max-width: 760px) {
