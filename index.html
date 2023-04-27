@@ -519,18 +519,30 @@
             <!-- Shopping Swiper -->
             <script>
               new Swiper(".sw-shopping", {
-                slidesPerView: 8,
-                spaceBetween: 24,
-                navigation: {
-                  nextEl: ".shopping .sw-next",
-                  prevEl: ".shopping .sw-prev",
+                slidesPerView: 5,
+                grid: {
+                  rows: 2,
+                  fill: "row",
                 },
+                spaceBetween: 10,
                 breakpoints: {
                   1024: {
+                    spaceBetween: 32,
                     slidesPerView: 3,
+                    // 화면당 3개씩 슬라이드 이동
+                    slidesPerGroup: 3,
+                    grid: {
+                      rows: 1,
+                    },
                   },
                   1280: {
+                    spaceBetween: 26,
                     slidesPerView: 4,
+                    // 화면당 4개씩 슬라이드 이동
+                    slidesPerGroup: 4,
+                    grid: {
+                      rows: 1,
+                    },
                   },
                 },
               });
