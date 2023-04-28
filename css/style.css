@@ -1044,12 +1044,6 @@ img {
   .ticket-img img {
     transform: translate(-50%, -50%) scale(1.4);
   }
-
-  .sw-ticket .swiper-slide {
-  }
-
-  .sw-ticket {
-  }
   .sw-ticket .swiper-slide {
     width: 150px;
   }
