@@ -1416,6 +1416,13 @@ img {
   transform: translate(-50%, -50%);
   mix-blend-mode: multiply;
 }
+
+@media screen and (max-width: 1024px) {
+  .event {
+    display: none;
+  }
+}
+
 /* 하단 */
 .footer {
 }
