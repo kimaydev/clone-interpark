@@ -50,6 +50,8 @@
     <![endif]-->
     <!-- CSS 초기화 파일 적용 -->
     <link rel="stylesheet" href="css/reset.css" />
+    <!-- JS 파일 로딩 -->
+    <script src="js/index.js"></script>
     <!-- vender pre fix -->
     <script src="js/prefixfree.min.js"></script>
     <!-- response -->
@@ -335,33 +337,7 @@
             </div>
           </div>
         </div>
-      </section>
-      <!-- promotion Swiper -->
-      <script>
-        let promotionSwiper = new Swiper(".sw-promotion", {
-          slidesPerView: 1,
-          spaceBetween: 24,
-          speed: 1000,
-          loop: true,
-          autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-          },
-          navigation: {
-            nextEl: ".promotion .sw-next",
-            prevEl: ".promotion .sw-prev",
-          },
-          pagination: {
-            el: ".sw-promotion-pg",
-            clickable: true,
-          },
-          breakpoints: {
-            760: {
-              slidesPerView: 2,
-            },
-          },
-        });
-      </script>
+      </section>      
       <!--// 추천 이벤트  -->
       <!-- 쇼핑추천 -->
       <section class="shopping">
@@ -515,38 +491,7 @@
                   </a>
                 </div>
               </div>
-            </div>
-            <!-- Shopping Swiper -->
-            <script>
-              let shoppingSwiper = new Swiper(".sw-shopping", {
-                slidesPerView: 5,
-                grid: {
-                  rows: 2,
-                  fill: "row",
-                },
-                spaceBetween: 10,
-                breakpoints: {
-                  1024: {
-                    spaceBetween: 32,
-                    slidesPerView: 3,
-                    // 화면당 3개씩 슬라이드 이동
-                    slidesPerGroup: 3,
-                    grid: {
-                      rows: 1,
-                    },
-                  },
-                  1280: {
-                    spaceBetween: 26,
-                    slidesPerView: 4,
-                    // 화면당 4개씩 슬라이드 이동
-                    slidesPerGroup: 4,
-                    grid: {
-                      rows: 1,
-                    },
-                  },
-                },
-              });
-            </script>
+            </div>            
           </div>
           <div class="section-bottom">
             <a href="#" class="bt-link-shop">쇼핑 홈 바로가기</a>
@@ -569,8 +514,7 @@
           </div>
           <div class="section-slide">
             <button class="sw-bt sw-prev">이전</button>
-            <button class="sw-bt sw-next">다음</button>
-            <!-- tour Swiper -->
+            <button class="sw-bt sw-next">다음</button>            
             <div class="swiper sw-tour">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -718,37 +662,7 @@
                   </a>
                 </div>
               </div>
-            </div>
-            <script>
-              let tourSwiper = new Swiper(".sw-tour", {
-                slidesPerView: 3,
-                grid: {
-                  rows: 2,
-                  fill: "row",
-                },
-                spaceBetween: 10,
-                breakpoints: {
-                  1024: {
-                    spaceBetween: 24,
-                    slidesPerView: 2,
-                    // 화면당 3개씩 슬라이드 이동
-                    slidesPerGroup: 2,
-                    grid: {
-                      rows: 1,
-                    },
-                  },
-                  1280: {
-                    spaceBetween: 26,
-                    slidesPerView: 3,
-                    // 화면당 4개씩 슬라이드 이동
-                    slidesPerGroup: 3,
-                    grid: {
-                      rows: 1,
-                    },
-                  },
-                },
-              });
-            </script>
+            </div>            
           </div>
           <div class="section-bottom">
             <a href="#" class="bt-link-shop">투어 홈 바로가기</a>
@@ -775,8 +689,7 @@
           </div>
           <div class="section-slide">
             <button class="sw-bt sw-prev">이전</button>
-            <button class="sw-bt sw-next">다음</button>
-            <!-- Ticket Swiper -->
+            <button class="sw-bt sw-next">다음</button>            
             <div class="swiper sw-ticket">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -950,22 +863,6 @@
               </div>
             </div>
           </div>
-          <script>
-            let ticketSwiper = new Swiper(".sw-ticket", {
-              slidesPerView: "auto",
-              spaceBetween: 10,
-              breakpoints: {
-                1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 32,
-                },
-                1280: {
-                  slidesPerView: 4,
-                  spaceBetween: 27,
-                },
-              },
-            });
-          </script>
           <div class="section-bottom">
             <a href="#" class="bt-link-shop">티켓 홈 바로가기</a>
           </div>
@@ -980,8 +877,7 @@
           </div>
           <div class="section-slide">
             <button class="sw-bt sw-prev">이전</button>
-            <button class="sw-bt sw-next">다음</button>
-            <!-- live swiper -->
+            <button class="sw-bt sw-next">다음</button>            
             <div class="swiper sw-live">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -1161,23 +1057,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          <script>
-            let liveSwiper = new Swiper(".sw-live", {
-              slidesPerView: 4,
-              spaceBetween: 10,
-              breakpoints: {
-                1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 32,
-                },
-                1280: {
-                  slidesPerView: 4,
-                  spaceBetween: 24,
-                },
-              },
-            });
-          </script>
+          </div>          
           <div class="section-bottom">
             <a href="#" class="bt-link-shop">인터파크 라이브 바로가기</a>
           </div>
@@ -1199,8 +1079,7 @@
           </div>
           <div class="section-slide">
             <button class="sw-bt sw-prev">이전</button>
-            <button class="sw-bt sw-next">다음</button>
-            <!-- book swiper -->
+            <button class="sw-bt sw-next">다음</button>            
             <div class="swiper sw-books">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -1316,34 +1195,7 @@
               </div>
             </div>
           </div>
-          <script>
-            let booksSwiper = new Swiper(".sw-books", {
-              slidesPerView: 3,
-              grid: {
-                rows: 4,
-                fill: "row",
-              },
-              spaceBetween: 19,
-              breakpoints: {
-                1024: {
-                  slidesPerView: 3,
-                  slidesPerGroup: 3,
-                  spaceBetween: 30,
-                  grid: {
-                    rows: 1,
-                  },
-                },
-                1280: {
-                  slidesPerView: 5,
-                  slidesPerGroup: 5,
-                  spaceBetween: 27,
-                  grid: {
-                    rows: 1,
-                  },
-                },
-              },
-            });
-          </script>
+          
           <div class="section-bottom">
             <a href="#" class="bt-link-shop">도서 홈 바로가기</a>
           </div>
@@ -1360,7 +1212,6 @@
           <div class="section-slide">
             <button class="sw-bt sw-prev">이전</button>
             <button class="sw-bt sw-next">다음</button>
-            <!-- event swiper -->
             <div class="swiper sw-events">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -1385,18 +1236,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          <script>
-            let eventsSwiper = new Swiper(".sw-events", {
-              slidesPerView: 3,
-              spaceBetween: 24,
-              breakpoints: {
-                1280: {
-                  slidesPerView: 4,
-                },
-              },
-            });
-          </script>
+          </div>          
         </div>
       </section>
       <!--// 이벤트 -->
