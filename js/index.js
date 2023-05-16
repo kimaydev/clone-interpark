@@ -68,215 +68,198 @@ window.onload = function () {
   `;
   */
 
-  let data = {
-    good_1: { name: "제품1", img: "promotion1.jpg", link: "" },
-    good_2: { name: "제품2", img: "promotion2.png", link: "" },
-    good_3: { name: "제품3", img: "promotion3.jpg", link: "" },
-    good_4: { name: "제품4", img: "promotion4.jpg", link: "" },
-    good_5: { name: "제품5", img: "promotion5.jpg", link: "" },
-    good_6: { name: "제품6", img: "promotion6.jpg", link: "" },
+  // prodata.json을 불러와서 배치한다.
+  // XMLHttpRequest :외부데이터(json)을 불러들일 때 사용
+  let data;
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function (event) {
+    // 상태가 바뀌는 것을 감지할 준비가 되었다면 기능이 동작한다.
+    // console.log(event);
+    const req = event.target;
+    // console.log(req);
+    if (req.readyState === XMLHttpRequest.DONE) {
+      // XMLHttpRequest.DONE : 자료를 다 불러 왔다면
+      // console.log(req.response);
+
+      /* 
+      현재 전달된 문자들은 json이 아니다.
+      req.response의 데이터 타입은 문자열이다.
+      그렇기 때문에 문자열을 json 객체로 변경하는 작업이 필요하다.
+      */
+      // let jData = JSON.parse(req.response);
+      // json으로 해석
+
+      data = JSON.parse(req.response);
+      // 자료가 들어오기 전에 실행되는 현상이 발생
+      // -> 내가 원하는 시점에 기능이 동작되어야 함(함수)
+      makePromotionSlide();
+    }
   };
-  let swPromotionHtml = ``;
-  // 1-2. for문을 이용한 html 데이터 생성
-  for (let i = 0; i < 6; i++) {
-    let obj = data[`good_${i + 1}`];
-    //good_1, good_2, good_3 ...
+  xhttp.open("GET", "prodata.json");
+  // GET 방식(HTTP로 가져옴)으로 prodata.json를 오픈한다.
+  xhttp.send();
 
-    // let imgName = obj.img;
+  function makePromotionSlide() {
+    // 자료가 들어오면 실행
+    let swPromotionHtml = ``;
+    // 1-2. for문을 이용한 html 데이터 생성
+    for (let i = 0; i < data.good_count; i++) {
+      let obj = data[`good_${i + 1}`];
+      //good_1, good_2, good_3 ...
 
-    // let imgName = `promotion${i + 1}.jpg`;
-    // if (i === 1) {
-    //   imgName = `promotion${i + 1}.png`;
-    // }
-    let html = `
-      <div class="swiper-slide">
-        <a href="${obj.link}">
-          <img src="images/${obj.img}" alt="프로모션${obj.name}" />
-        </a>
-      </div>
-    `;
-    // swPromotionHtml = swPromotionHtml + html;
-    // 아래의 방법으로도 사용할 수 있다.
-    swPromotionHtml += html;
-  }
-  // 위 백틱의 내용을 넣어줄 장소를 저장
-  let swPromotionWrapper = document.querySelector(
-    ".sw-promotion .swiper-wrapper"
-  );
-  swPromotionWrapper.innerHTML = swPromotionHtml;
+      // let imgName = obj.img;
 
-  let promotionSwiper = new Swiper(".sw-promotion", {
-    slidesPerView: 1,
-    spaceBetween: 24,
-    speed: 1000,
-    loop: true,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-    navigation: {
-      nextEl: ".promotion .sw-next",
-      prevEl: ".promotion .sw-prev",
-    },
-    pagination: {
-      el: ".sw-promotion-pg",
-      clickable: true,
-    },
-    breakpoints: {
-      760: {
-        slidesPerView: 2,
+      // let imgName = `promotion${i + 1}.jpg`;
+      // if (i === 1) {
+      //   imgName = `promotion${i + 1}.png`;
+      // }
+      let html = `
+        <div class="swiper-slide">
+          <a href="${obj.link}">
+            <img src="images/${obj.img}" alt="프로모션${obj.name}" />
+          </a>
+        </div>
+      `;
+      // swPromotionHtml = swPromotionHtml + html;
+      // 아래의 방법으로도 사용할 수 있다.
+      swPromotionHtml += html;
+    }
+    // 위 백틱의 내용을 넣어줄 장소를 저장
+    let swPromotionWrapper = document.querySelector(
+      ".sw-promotion .swiper-wrapper"
+    );
+    swPromotionWrapper.innerHTML = swPromotionHtml;
+
+    let promotionSwiper = new Swiper(".sw-promotion", {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      speed: 1000,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
       },
-    },
-  });
+      navigation: {
+        nextEl: ".promotion .sw-next",
+        prevEl: ".promotion .sw-prev",
+      },
+      pagination: {
+        el: ".sw-promotion-pg",
+        clickable: true,
+      },
+      breakpoints: {
+        760: {
+          slidesPerView: 2,
+        },
+      },
+    });
+  }
+
+  // let data = jData;
+  // jData는 function 안에 있기 때문에 렉시컬 스코프로 인해 js가 찾지 못한다.
+
+  // let data = {
+  //   good_1: { name: "제품1", img: "promotion1.jpg", link: "" },
+  //   good_2: { name: "제품2", img: "promotion2.png", link: "" },
+  //   good_3: { name: "제품3", img: "promotion3.jpg", link: "" },
+  //   good_4: { name: "제품4", img: "promotion4.jpg", link: "" },
+  //   good_5: { name: "제품5", img: "promotion5.jpg", link: "" },
+  //   good_6: { name: "제품6", img: "promotion6.jpg", link: "" },
+  // };
+
   // Shopping Swiper
 
-  let shoppingData = {
-    good_count: 5,
-    good_1: {
-      link: "#",
-      pic: "good1.png",
-      product: "맥 MAC 립스틱",
-      ratio: 5,
-      price: "11,950",
-    },
-    good_2: {
-      link: "#",
-      pic: "good2.jpg",
-      product: "[장터할매]2023년 햇양파 중품/짱아치용 특품 3kg~10kg",
-      ratio: 5,
-      price: "11,950",
-    },
-    good_3: {
-      link: "#",
-      pic: "good3.jpg",
-      product:
-        " QCY GTS 스마트워치 2세대 블랙/ 블루투스 통화가능/실리콘 스트랩 메탈 스트랩 TPU 보호필름 추가구매",
-      ratio: 5,
-      price: "11,950",
-    },
-    good_4: {
-      link: "#",
-      pic: "good4.jpg",
-      product: "[베베당] 유기농 롱스틱 골고루 10봉 세트",
-      ratio: 5,
-      price: "11,950",
-    },
-    good_5: {
-      link: "#",
-      pic: "good4.jpg",
-      product: "[베베당] 유기농 롱스틱 골고루 10봉 세트",
-      ratio: 5,
-      price: "11,950",
-    },
+  let shoppingData;
+  const shopXhttp = new XMLHttpRequest();
+  shopXhttp.onreadystatechange = function (event) {
+    let req = event.target;
+    if (req.readyState === XMLHttpRequest.DONE) {
+      shoppingData = JSON.parse(req.response);
+      makeShoppingSlide();
+    }
   };
-  let swShoppingHtml = ``;
-  for (let i = 0; i < shoppingData.good_count; i++) {
-    let obj = shoppingData[`good_${i + 1}`];
-    let temp = `
-    <div class="swiper-slide">
-      <a href="${obj.link}" class="good">
-        <img src="images/${obj.pic}" alt="${obj.product}" />
-        <div class="good-info">
-          <ul class="good-info-list">
-            <li>
-              <b> <span>${obj.ratio}%</span> ${obj.price}원 </b>
-            </li>
-            <li>
-              <p>${obj.product}</p>
-            </li>
-          </ul>
-        </div>
-      </a>
-    </div>
-    `;
-    swShoppingHtml += temp;
+  shopXhttp.open("GET", "shoppingdata.json");
+  shopXhttp.send();
+  function makeShoppingSlide() {
+    let swShoppingHtml = ``;
+    for (let i = 0; i < shoppingData.good_count; i++) {
+      let obj = shoppingData[`good_${i + 1}`];
+      let temp = `
+      <div class="swiper-slide">
+        <a href="${obj.link}" class="good">
+          <img src="images/${obj.pic}" alt="${obj.product}" />
+          <div class="good-info">
+            <ul class="good-info-list">
+              <li>
+                <b> <span>${obj.ratio}%</span> ${obj.price}원 </b>
+              </li>
+              <li>
+                <p>${obj.product}</p>
+              </li>
+            </ul>
+          </div>
+        </a>
+      </div>
+      `;
+      swShoppingHtml += temp;
+    }
+    let swShoppingWrapper = document.querySelector(
+      ".sw-shopping .swiper-wrapper"
+    );
+    swShoppingWrapper.innerHTML = swShoppingHtml;
+    let shoppingSwiper = new Swiper(".sw-shopping", {
+      slidesPerView: 5,
+      grid: {
+        rows: 2,
+        fill: "row",
+      },
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".shopping .sw-next",
+        prevEl: ".shopping .sw-prev",
+      },
+      breakpoints: {
+        1024: {
+          spaceBetween: 32,
+          slidesPerView: 3,
+          // 화면당 3개씩 슬라이드 이동
+          slidesPerGroup: 3,
+          grid: {
+            rows: 1,
+          },
+        },
+        1280: {
+          spaceBetween: 26,
+          slidesPerView: 4,
+          // 화면당 4개씩 슬라이드 이동
+          slidesPerGroup: 4,
+          grid: {
+            rows: 1,
+          },
+        },
+      },
+    });
   }
 
-  let swShoppingWrapper = document.querySelector(
-    ".sw-shopping .swiper-wrapper"
-  );
-  swShoppingWrapper.innerHTML = swShoppingHtml;
-  let shoppingSwiper = new Swiper(".sw-shopping", {
-    slidesPerView: 5,
-    grid: {
-      rows: 2,
-      fill: "row",
-    },
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".shopping .sw-next",
-      prevEl: ".shopping .sw-prev",
-    },
-    breakpoints: {
-      1024: {
-        spaceBetween: 32,
-        slidesPerView: 3,
-        // 화면당 3개씩 슬라이드 이동
-        slidesPerGroup: 3,
-        grid: {
-          rows: 1,
-        },
-      },
-      1280: {
-        spaceBetween: 26,
-        slidesPerView: 4,
-        // 화면당 4개씩 슬라이드 이동
-        slidesPerGroup: 4,
-        grid: {
-          rows: 1,
-        },
-      },
-    },
-  });
   // tour Swiper
-  let tourData = {
-    tour_total: 4,
-    tour_1: {
-      link: "#",
-      pic: "tour1.jpg",
-      alt: "tour1",
-      category: "반짝특가",
-      title:
-        "[미동부/캐나다 10일] 밤 출발 에어프레미아 10일 [퀘벡숙박/3대야경/보스턴]",
-      place: "웨스틴 리조트 괌",
-      price: "350,300",
-    },
-    tour_2: {
-      link: "#",
-      pic: "tour2.jpg",
-      alt: "tour2",
-      category: "",
-      title:
-        "[미동부/캐나다 10일] 밤 출발 에어프레미아 10일 [퀘벡숙박/3대야경/보스턴]",
-      place: "웨스틴 리조트 괌",
-      price: "350,300",
-    },
-    tour_3: {
-      link: "#",
-      pic: "tour3.jpg",
-      alt: "tour3",
-      category: "반짝특가",
-      title:
-        "[미동부/캐나다 10일] 밤 출발 에어프레미아 10일 [퀘벡숙박/3대야경/보스턴]",
-      place: "웨스틴 리조트 괌",
-      price: "350,300",
-    },
-    tour_4: {
-      link: "#",
-      pic: "tour1.jpg",
-      alt: "tour1",
-      category: "반짝특가",
-      title:
-        "[미동부/캐나다 10일] 밤 출발 에어프레미아 10일 [퀘벡숙박/3대야경/보스턴]",
-      place: "웨스틴 리조트 괌",
-      price: "350,300",
-    },
+
+  let tourData;
+  const tourXhttp = new XMLHttpRequest();
+  tourXhttp.onreadystatechange = function (event) {
+    let req = event.target;
+    if (req.readyState === XMLHttpRequest.DONE) {
+      tourData = JSON.parse(req.response);
+      makeTourSlide();
+    }
   };
-  let swTourHtml = ``;
-  for (let i = 0; i < tourData.tour_total; i++) {
-    let obj = tourData[`tour_${i + 1}`];
-    let cate = obj.category;
-    let temp = `
+  tourXhttp.open("GET", "tourdata.json");
+  tourXhttp.send();
+  function makeTourSlide() {
+    let swTourHtml = ``;
+    for (let i = 0; i < tourData.tour_total; i++) {
+      let obj = tourData[`tour_${i + 1}`];
+      let cate = obj.category;
+      let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="tour-link">
           <div class="tour-img">
@@ -284,14 +267,14 @@ window.onload = function () {
           </div>
           <div class="tour-info">
             <ul class="tour-info-list">`;
-    // category에 내용이 없을 경우에는 HTML 자체가 출력되지 않게 한다.
-    if (cate) {
-      // cate 내용이 존재 할 때
-      temp += `
+      // category에 내용이 없을 경우에는 HTML 자체가 출력되지 않게 한다.
+      if (cate) {
+        // cate 내용이 존재 할 때
+        temp += `
                   <li><span class="tour-cate">${obj.category}</span></li>
                 `;
-    }
-    temp += `
+      }
+      temp += `
               <li>
                 <span class="tour-title"
                   >${obj.title}</span
@@ -308,110 +291,62 @@ window.onload = function () {
         </a>
       </div>
     `;
-    swTourHtml += temp;
+      swTourHtml += temp;
+    }
+    let swTourWrapper = document.querySelector(".sw-tour .swiper-wrapper");
+    swTourWrapper.innerHTML = swTourHtml;
+    let tourSwiper = new Swiper(".sw-tour", {
+      slidesPerView: 3,
+      grid: {
+        rows: 2,
+        fill: "row",
+      },
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".tour .sw-next",
+        prevEl: ".tour .sw-prev",
+      },
+      breakpoints: {
+        1024: {
+          spaceBetween: 24,
+          slidesPerView: 2,
+          // 화면당 3개씩 슬라이드 이동
+          slidesPerGroup: 2,
+          grid: {
+            rows: 1,
+          },
+        },
+        1280: {
+          spaceBetween: 26,
+          slidesPerView: 3,
+          // 화면당 4개씩 슬라이드 이동
+          slidesPerGroup: 3,
+          grid: {
+            rows: 1,
+          },
+        },
+      },
+    });
   }
-  let swTourWrapper = document.querySelector(".sw-tour .swiper-wrapper");
-  swTourWrapper.innerHTML = swTourHtml;
-  let tourSwiper = new Swiper(".sw-tour", {
-    slidesPerView: 3,
-    grid: {
-      rows: 2,
-      fill: "row",
-    },
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".tour .sw-next",
-      prevEl: ".tour .sw-prev",
-    },
-    breakpoints: {
-      1024: {
-        spaceBetween: 24,
-        slidesPerView: 2,
-        // 화면당 3개씩 슬라이드 이동
-        slidesPerGroup: 2,
-        grid: {
-          rows: 1,
-        },
-      },
-      1280: {
-        spaceBetween: 26,
-        slidesPerView: 3,
-        // 화면당 4개씩 슬라이드 이동
-        slidesPerGroup: 3,
-        grid: {
-          rows: 1,
-        },
-      },
-    },
-  });
+
   // Ticket Swiper
-  let ticketData = {
-    ticket_total: 6,
-    ticket_1: {
-      link: "#",
-      pic: "musical1.gif",
-      alt: "musical1",
-      rank: 1,
-      title: "뮤지컬〈영웅〉- 블루스퀘어",
-      place: "블루스퀘어 신한카드홀",
-      date: "2023.03.17 ~ 2023.05.21",
-      sale: "단독판매",
-    },
-    ticket_2: {
-      link: "#",
-      pic: "musical2.gif",
-      alt: "musical2",
-      rank: 2,
-      title: "뮤지컬〈영웅〉- 블루스퀘어",
-      place: "블루스퀘어 신한카드홀",
-      date: "2023.03.17 ~ 2023.05.21",
-      sale: "단독판매",
-    },
-    ticket_3: {
-      link: "#",
-      pic: "musical3.gif",
-      alt: "musical3",
-      rank: 3,
-      title: "뮤지컬〈영웅〉- 블루스퀘어",
-      place: "블루스퀘어 신한카드홀",
-      date: "2023.03.17 ~ 2023.05.21",
-      sale: "단독판매",
-    },
-    ticket_4: {
-      link: "#",
-      pic: "musical4.gif",
-      alt: "musical4",
-      rank: 4,
-      title: "뮤지컬〈영웅〉- 블루스퀘어",
-      place: "블루스퀘어 신한카드홀",
-      date: "2023.03.17 ~ 2023.05.21",
-      sale: "단독판매",
-    },
-    ticket_5: {
-      link: "#",
-      pic: "musical1.gif",
-      alt: "musical1",
-      rank: 5,
-      title: "뮤지컬〈영웅〉- 블루스퀘어",
-      place: "블루스퀘어 신한카드홀",
-      date: "2023.03.17 ~ 2023.05.21",
-      sale: "단독판매",
-    },
-    ticket_6: {
-      link: "#",
-      pic: "musical2.gif",
-      alt: "musical2",
-      rank: 6,
-      title: "뮤지컬〈영웅〉- 블루스퀘어",
-      place: "블루스퀘어 신한카드홀",
-      date: "2023.03.17 ~ 2023.05.21",
-      sale: "단독판매",
-    },
+
+  let ticketData;
+  const ticketXhttp = new XMLHttpRequest();
+  ticketXhttp.onreadystatechange = function (event) {
+    let req = event.target;
+    if (req.readyState === XMLHttpRequest.DONE) {
+      ticketData = JSON.parse(req.response);
+      makeTicketSlide();
+    }
   };
-  swticketHtml = ``;
-  for (let i = 0; i < ticketData.ticket_total; i++) {
-    let obj = ticketData[`ticket_${i + 1}`];
-    let temp = `
+  ticketXhttp.open("GET", "ticketdata.json");
+  ticketXhttp.send();
+  function makeTicketSlide() {
+    swticketHtml = ``;
+    for (let i = 0; i < ticketData.ticket_total; i++) {
+      let obj = ticketData[`ticket_${i + 1}`];
+      let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="ticket-link">
           <div class="ticket-img">
@@ -441,103 +376,49 @@ window.onload = function () {
         </a>
       </div>
     `;
-    swticketHtml += temp;
-  }
-  let swticketWrapper = document.querySelector(".sw-ticket .swiper-wrapper");
-  swticketWrapper.innerHTML = swticketHtml;
+      swticketHtml += temp;
+    }
+    let swticketWrapper = document.querySelector(".sw-ticket .swiper-wrapper");
+    swticketWrapper.innerHTML = swticketHtml;
 
-  let ticketSwiper = new Swiper(".sw-ticket", {
-    slidesPerView: "auto",
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".ticket .sw-next",
-      prevEl: ".ticket .sw-prev",
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 32,
+    let ticketSwiper = new Swiper(".sw-ticket", {
+      slidesPerView: "auto",
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".ticket .sw-next",
+        prevEl: ".ticket .sw-prev",
       },
-      1280: {
-        slidesPerView: 4,
-        spaceBetween: 27,
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 32,
+        },
+        1280: {
+          slidesPerView: 4,
+          spaceBetween: 27,
+        },
       },
-    },
-  });
+    });
+  }
+
   // live swiper
 
-  let liveData = {
-    live_total: 5,
-    live_1: {
-      link: "#",
-      pic: "live1.jpg",
-      alt: "라이브1",
-      category: "방송예정",
-      title:
-        "2박 3일로 떠나는 후쿠오카 여행✈ 패키지VS자유여행 다 준비했어요 😆",
-      date: "04월 27일 (목)",
-      time: "16:00",
-      desc: "[미미의밥상] 감자탕 4.7kg(국내산등뼈 100% 10인분)+라면사리",
-      ratio: 22,
-      price: "19,840",
-    },
-    live_2: {
-      link: "#",
-      pic: "live2.jpg",
-      alt: "라이브2",
-      category: "방송예정",
-      title:
-        "2박 3일로 떠나는 후쿠오카 여행✈ 패키지VS자유여행 다 준비했어요 😆",
-      date: "04월 27일 (목)",
-      time: "16:00",
-      desc: "[미미의밥상] 감자탕 4.7kg(국내산등뼈 100% 10인분)+라면사리",
-      ratio: 22,
-      price: "19,840",
-    },
-    live_3: {
-      link: "#",
-      pic: "live3.jpg",
-      alt: "라이브3",
-      category: "방송예정",
-      title:
-        "2박 3일로 떠나는 후쿠오카 여행✈ 패키지VS자유여행 다 준비했어요 😆",
-      date: "04월 27일 (목)",
-      time: "16:00",
-      desc: "[미미의밥상] 감자탕 4.7kg(국내산등뼈 100% 10인분)+라면사리",
-      ratio: 22,
-      price: "19,840",
-    },
-    live_4: {
-      link: "#",
-      pic: "live4.jpg",
-      alt: "라이브4",
-      category: "방송예정",
-      title:
-        "2박 3일로 떠나는 후쿠오카 여행✈ 패키지VS자유여행 다 준비했어요 😆",
-      date: "04월 27일 (목)",
-      time: "16:00",
-      desc: "[미미의밥상] 감자탕 4.7kg(국내산등뼈 100% 10인분)+라면사리",
-      ratio: 22,
-      price: "19,840",
-    },
-    live_5: {
-      link: "#",
-      pic: "live1.jpg",
-      alt: "라이브1",
-      category: "방송예정",
-      title:
-        "2박 3일로 떠나는 후쿠오카 여행✈ 패키지VS자유여행 다 준비했어요 😆",
-      date: "04월 27일 (목)",
-      time: "16:00",
-      desc: "[미미의밥상] 감자탕 4.7kg(국내산등뼈 100% 10인분)+라면사리",
-      ratio: 22,
-      price: "19,840",
-    },
+  let liveData;
+  const liveXhttp = new XMLHttpRequest();
+  liveXhttp.onreadystatechange = function (event) {
+    let req = event.target;
+    if (req.readyState === XMLHttpRequest.DONE) {
+      liveData = JSON.parse(req.response);
+      makeLiveSlide();
+    }
   };
-  let swLiveHtml = ``;
-  for (let i = 0; i < liveData.live_total; i++) {
-    let obj = liveData[`live_${i + 1}`];
-    let temp = `
+  liveXhttp.open("GET", "livedata.json");
+  liveXhttp.send();
+  function makeLiveSlide() {
+    let swLiveHtml = ``;
+    for (let i = 0; i < liveData.live_total; i++) {
+      let obj = liveData[`live_${i + 1}`];
+      let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="live-link">
           <div class="live-img">
@@ -572,95 +453,50 @@ window.onload = function () {
         </a>
       </div>
     `;
-    swLiveHtml += temp;
+      swLiveHtml += temp;
+    }
+
+    let swLiveWrapper = document.querySelector(".sw-live .swiper-wrapper");
+    swLiveWrapper.innerHTML = swLiveHtml;
+
+    let liveSwiper = new Swiper(".sw-live", {
+      slidesPerView: 4,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".live .sw-next",
+        prevEl: ".live .sw-prev",
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 32,
+        },
+        1280: {
+          slidesPerView: 4,
+          spaceBetween: 24,
+        },
+      },
+    });
   }
 
-  let swLiveWrapper = document.querySelector(".sw-live .swiper-wrapper");
-  swLiveWrapper.innerHTML = swLiveHtml;
-
-  let liveSwiper = new Swiper(".sw-live", {
-    slidesPerView: 4,
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".live .sw-next",
-      prevEl: ".live .sw-prev",
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 32,
-      },
-      1280: {
-        slidesPerView: 4,
-        spaceBetween: 24,
-      },
-    },
-  });
   // book swiper
 
-  let booksData = {
-    books_total: 8,
-    books_1: {
-      link: "#",
-      pic: "book1.jpg",
-      alt: "book1",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_2: {
-      link: "#",
-      pic: "book2.jpg",
-      alt: "book2",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_3: {
-      link: "#",
-      pic: "book3.jpg",
-      alt: "book3",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_4: {
-      link: "#",
-      pic: "book4.jpg",
-      alt: "book4",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_5: {
-      link: "#",
-      pic: "book5.jpg",
-      alt: "book5",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_6: {
-      link: "#",
-      pic: "book1.jpg",
-      alt: "book1",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_7: {
-      link: "#",
-      pic: "book2.jpg",
-      alt: "book2",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
-    books_8: {
-      link: "#",
-      pic: "book3.jpg",
-      alt: "book3",
-      title: "New 대한민국 청약지도",
-      price: "18,000",
-    },
+  let booksData;
+  const booksXhttp = new XMLHttpRequest();
+  booksXhttp.onreadystatechange = function (event) {
+    let req = event.target;
+    if (req.readyState === XMLHttpRequest.DONE) {
+      booksData = JSON.parse(req.response);
+      makeBooksSlide();
+    }
   };
-  let swbooksHtml = ``;
-  for (let i = 0; i < booksData.books_total; i++) {
-    let obj = booksData[`books_${i + 1}`];
-    let temp = `
+  booksXhttp.open("GET", "booksdata.json");
+  booksXhttp.send();
+  function makeBooksSlide() {
+    let swbooksHtml = ``;
+    for (let i = 0; i < booksData.books_total; i++) {
+      let obj = booksData[`books_${i + 1}`];
+      let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="books-link">
           <div class="books-img">
@@ -673,94 +509,85 @@ window.onload = function () {
         </a>
       </div>
     `;
-    swbooksHtml += temp;
+      swbooksHtml += temp;
+    }
+
+    let swbooksWrapper = document.querySelector(".sw-books .swiper-wrapper");
+    swbooksWrapper.innerHTML = swbooksHtml;
+
+    let booksSwiper = new Swiper(".sw-books", {
+      slidesPerView: 3,
+      grid: {
+        rows: 4,
+        fill: "row",
+      },
+      spaceBetween: 19,
+      navigation: {
+        nextEl: ".books .sw-next",
+        prevEl: ".books .sw-prev",
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+          spaceBetween: 30,
+          grid: {
+            rows: 1,
+          },
+        },
+        1280: {
+          slidesPerView: 5,
+          slidesPerGroup: 5,
+          spaceBetween: 27,
+          grid: {
+            rows: 1,
+          },
+        },
+      },
+    });
   }
-
-  let swbooksWrapper = document.querySelector(".sw-books .swiper-wrapper");
-  swbooksWrapper.innerHTML = swbooksHtml;
-
-  let booksSwiper = new Swiper(".sw-books", {
-    slidesPerView: 3,
-    grid: {
-      rows: 4,
-      fill: "row",
-    },
-    spaceBetween: 19,
-    navigation: {
-      nextEl: ".books .sw-next",
-      prevEl: ".books .sw-prev",
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-        spaceBetween: 30,
-        grid: {
-          rows: 1,
-        },
-      },
-      1280: {
-        slidesPerView: 5,
-        slidesPerGroup: 5,
-        spaceBetween: 27,
-        grid: {
-          rows: 1,
-        },
-      },
-    },
-  });
   //  event swiper
 
-  let eventData = {
-    event_total: 4,
-    event_1: {
-      link: "#",
-      pic: "banner1.jpg",
-      alt: "banner1",
-    },
-    event_2: {
-      link: "#",
-      pic: "banner2.jpg",
-      alt: "banner2",
-    },
-    event_3: {
-      link: "#",
-      pic: "banner3.jpg",
-      alt: "banner3",
-    },
-    event_4: {
-      link: "#",
-      pic: "banner4.jpg",
-      alt: "banner4",
-    },
+  let eventData;
+  const eventXhttp = new XMLHttpRequest();
+  eventXhttp.onreadystatechange = function (event) {
+    let req = event.target;
+    if (req.readyState === XMLHttpRequest.DONE) {
+      eventData = JSON.parse(req.response);
+      makeEventSlide();
+    }
   };
-  let swEventHtml = ``;
-  for (let i = 0; i < eventData.event_total; i++) {
-    let obj = eventData[`event_${i + 1}`];
-    let temp = `
+  eventXhttp.open("GET", "eventdata.json");
+  eventXhttp.send();
+  function makeEventSlide() {
+    let swEventHtml = ``;
+    for (let i = 0; i < eventData.event_total; i++) {
+      let obj = eventData[`event_${i + 1}`];
+      let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="event-link">
           <img src="images/${obj.pic}" alt="${obj.alt}" />
         </a>
       </div>
     `;
-    swEventHtml += temp;
-  }
+      swEventHtml += temp;
+    }
 
-  let swEventWrapper = document.querySelector(".sw-events .swiper-wrapper");
-  swEventWrapper.innerHTML = swEventHtml;
+    let swEventWrapper = document.querySelector(".sw-events .swiper-wrapper");
+    swEventWrapper.innerHTML = swEventHtml;
 
-  let eventsSwiper = new Swiper(".sw-events", {
-    slidesPerView: 3,
-    spaceBetween: 24,
-    navigation: {
-      nextEl: ".event .sw-next",
-      prevEl: ".event .sw-prev",
-    },
-    breakpoints: {
-      1280: {
-        slidesPerView: 4,
+    let eventsSwiper = new Swiper(".sw-events", {
+      slidesPerView: 3,
+      spaceBetween: 24,
+      navigation: {
+        nextEl: ".event .sw-next",
+        prevEl: ".event .sw-prev",
       },
-    },
-  });
+      breakpoints: {
+        1280: {
+          slidesPerView: 4,
+        },
+      },
+    });
+  }
 };

@@ -1,0 +1,23 @@
+{
+  "event_total": 4,
+  "event_1": {
+    "link": "#",
+    "pic": "banner1.jpg",
+    "alt": "banner1"
+  },
+  "event_2": {
+    "link": "#",
+    "pic": "banner2.jpg",
+    "alt": "banner2"
+  },
+  "event_3": {
+    "link": "#",
+    "pic": "banner3.jpg",
+    "alt": "banner3"
+  },
+  "event_4": {
+    "link": "#",
+    "pic": "banner4.jpg",
+    "alt": "banner4"
+  }
+}

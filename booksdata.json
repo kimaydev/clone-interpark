@@ -1,0 +1,59 @@
+{
+  "books_total": 8,
+  "books_1": {
+    "link": "#",
+    "pic": "book1.jpg",
+    "alt": "book1",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_2": {
+    "link": "#",
+    "pic": "book2.jpg",
+    "alt": "book2",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_3": {
+    "link": "#",
+    "pic": "book3.jpg",
+    "alt": "book3",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_4": {
+    "link": "#",
+    "pic": "book4.jpg",
+    "alt": "book4",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_5": {
+    "link": "#",
+    "pic": "book5.jpg",
+    "alt": "book5",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_6": {
+    "link": "#",
+    "pic": "book1.jpg",
+    "alt": "book1",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_7": {
+    "link": "#",
+    "pic": "book2.jpg",
+    "alt": "book2",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_8": {
+    "link": "#",
+    "pic": "book3.jpg",
+    "alt": "book3",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  }
+}
