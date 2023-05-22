@@ -18,13 +18,13 @@ window.addEventListener("load", function () {
       }
     };
     if (_cate === "MD's Pick") {
-      booksXhttp.open("GET", "booksdata.json");
+      booksXhttp.open("GET", "data/booksdata.json");
     } else if (_cate === "베스트셀러") {
-      booksXhttp.open("GET", "booksdata1.json");
+      booksXhttp.open("GET", "data/booksdata1.json");
     } else if (_cate === "신간추천") {
-      booksXhttp.open("GET", "booksdata2.json");
+      booksXhttp.open("GET", "data/booksdata2.json");
     } else if (_cate === "특가할인") {
-      booksXhttp.open("GET", "booksdata3.json");
+      booksXhttp.open("GET", "data/booksdata3.json");
     }
     booksXhttp.send();
   }

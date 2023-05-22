@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
       makeEventSlide();
     }
   };
-  eventXhttp.open("GET", "eventdata.json");
+  eventXhttp.open("GET", "data/eventdata.json");
   eventXhttp.send();
   function makeEventSlide() {
     let swEventHtml = ``;

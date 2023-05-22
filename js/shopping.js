@@ -21,15 +21,15 @@ window.addEventListener("load", function () {
     // 1. 전달된 매개변수 _menu에 따라
     // 2. 관련 json데이터를 불러들이고,
     if (_menu === "쎈딜") {
-      xhr.open("GET", "shoppingdata.json");
+      xhr.open("GET", "data/shoppingdata.json");
     } else if (_menu === "베스트") {
-      xhr.open("GET", "shoppingdata1.json");
+      xhr.open("GET", "data/shoppingdata1.json");
     } else if (_menu === "오늘만특가") {
-      xhr.open("GET", "shoppingdata2.json");
+      xhr.open("GET", "data/shoppingdata2.json");
     } else if (_menu === "어린이날") {
-      xhr.open("GET", "shoppingdata3.json");
+      xhr.open("GET", "data/shoppingdata3.json");
     } else if (_menu === "소담상회") {
-      xhr.open("GET", "shoppingdata4.json");
+      xhr.open("GET", "data/shoppingdata4.json");
     }
     xhr.send();
     // 3. HTML을 만들어서

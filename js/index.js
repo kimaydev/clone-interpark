@@ -95,7 +95,7 @@ window.onload = function () {
       makePromotionSlide();
     }
   };
-  xhttp.open("GET", "prodata.json");
+  xhttp.open("GET", "data/prodata.json");
   // GET 방식(HTTP로 가져옴)으로 prodata.json를 오픈한다.
   xhttp.send();
 
@@ -166,9 +166,4 @@ window.onload = function () {
   //   good_5: { name: "제품5", img: "promotion5.jpg", link: "" },
   //   good_6: { name: "제품6", img: "promotion6.jpg", link: "" },
   // };
-
-  
-
-  
-  
 };
