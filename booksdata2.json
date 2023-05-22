@@ -1,0 +1,17 @@
+{
+  "books_total": 2,
+  "books_1": {
+    "link": "#",
+    "pic": "book1.jpg",
+    "alt": "book1",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  },
+  "books_2": {
+    "link": "#",
+    "pic": "book2.jpg",
+    "alt": "book2",
+    "title": "New 대한민국 청약지도",
+    "price": "18,000"
+  }
+}
