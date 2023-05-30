@@ -120,36 +120,24 @@ window.addEventListener("load", function () {
     });
   }
   let btns = document.querySelectorAll(".ticket .btns a");
-  btns[0].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("뮤지컬");
-  };
-  btns[1].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("콘서트");
-  };
-  btns[2].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("연극");
-  };
-  btns[3].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("클래식/무용");
-  };
-  btns[4].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("스포츠");
-  };
-  btns[5].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("레저/캠핑");
-  };
-  btns[6].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("전시/행사");
-  };
-  btns[7].onclick = function (event) {
-    event.preventDefault();
-    parseTicket("아동/가족");
-  };
+  let cateName = [
+    "뮤지컬",
+    "콘서트",
+    "연극",
+    "클래식/무용",
+    "스포츠",
+    "레저/캠핑",
+    "전시/행사",
+    "아동/가족",
+  ];
+  for (let i = 0; i < cateName.length; i++) {
+    btns[i].onclick = function (event) {
+      event.preventDefault();
+      parseTicket(cateName[i]);
+      for (let j = 0; j < btns.length; j++) {
+        btns[j].classList.remove("btns-active");
+      }
+      this.classList.add("btns-active");
+    };
+  }
 });
