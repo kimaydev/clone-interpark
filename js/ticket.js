@@ -1,40 +1,55 @@
 /*
  * 작성자 : 김아영
  * 연락처 : kimaydev@gmail.com
- * 작성일 : 23-05-22
+ * 작성일 : 23-05-30
  * 기능 : ticket 리스트 슬라이드 코드
- * 업데이트 : 각 ticket 리스트 목록 출력 함수화 작업
+ * 업데이트 : 각 ticket 리스트 목록 코드 fetch로 변경
  */
 window.addEventListener("load", function () {
   // Ticket Swiper
 
   function parseTicket(_cate) {
-    const ticketXhttp = new XMLHttpRequest();
-    ticketXhttp.onreadystatechange = function (event) {
-      let req = event.target;
-      if (req.readyState === XMLHttpRequest.DONE) {
-        let data = JSON.parse(req.response);
-        makeTicketSlide(data);
-      }
-    };
     if (_cate === "뮤지컬") {
-      ticketXhttp.open("GET", "data/ticketdata.json");
+      fetch("data/ticketdata.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "콘서트") {
-      ticketXhttp.open("GET", "data/ticketdata1.json");
+      fetch("data/ticketdata1.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "연극") {
-      ticketXhttp.open("GET", "data/ticketdata2.json");
+      fetch("data/ticketdata2.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "클래식/무용") {
-      ticketXhttp.open("GET", "data/ticketdata3.json");
+      fetch("data/ticketdata3.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "스포츠") {
-      ticketXhttp.open("GET", "data/ticketdata4.json");
+      fetch("data/sports.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "레저/캠핑") {
-      ticketXhttp.open("GET", "data/ticketdata5.json");
+      fetch("data/ticketdata5.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "전시/행사") {
-      ticketXhttp.open("GET", "data/ticketdata6.json");
+      fetch("data/ticketexhibition.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "아동/가족") {
-      ticketXhttp.open("GET", "data/ticketdata7.json");
+      fetch("data/ticketdata7.json")
+        .then((res) => res.json())
+        .then((result) => makeTicketSlide(result))
+        .catch((err) => console.log(err));
     }
-    ticketXhttp.send();
   }
   parseTicket("뮤지컬");
   let ticketSwiper;
@@ -43,6 +58,7 @@ window.addEventListener("load", function () {
     swticketHtml = ``;
     for (let i = 0; i < _data.ticket_total; i++) {
       let obj = _data[`ticket_${i + 1}`];
+      let cate = obj.sale;
       let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="ticket-link">
@@ -61,13 +77,16 @@ window.addEventListener("load", function () {
                 <span class="ticket-hall">${obj.place}</span>
               </li>
               <li>
-                <span class="ticket-date"
-                  >${obj.date}</span
-                >
-              </li>
-              <li>
+                <span class="ticket-date">${obj.date}</span>
+              </li>`;
+      if (cate) {
+        temp += `
+                <li>
                 <span class="ticket-sale">${obj.sale}</span>
-              </li>
+                </li>
+                `;
+      }
+      temp += `
             </ul>
           </div>
         </a>

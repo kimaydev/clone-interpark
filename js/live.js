@@ -1,17 +1,9 @@
-/*
- * 작성자 : 김아영
- * 연락처 : kimaydev@gmail.com
- * 작성일 : 23-05-22
- * 기능 : 라이브 리스트 슬라이드 코드
- * 업데이트 : 라이브 리스트 슬라이드 js파일 분리
- */
 window.addEventListener("load", function () {
-  // live swiper
-
+  // live Swiper
   let liveData;
-  const liveXhttp = new XMLHttpRequest();
+  let liveXhttp = new XMLHttpRequest();
   liveXhttp.onreadystatechange = function (event) {
-    let req = event.target;
+    const req = event.target;
     if (req.readyState === XMLHttpRequest.DONE) {
       liveData = JSON.parse(req.response);
       makeLiveSlide();
@@ -19,45 +11,52 @@ window.addEventListener("load", function () {
   };
   liveXhttp.open("GET", "data/livedata.json");
   liveXhttp.send();
+
   function makeLiveSlide() {
     let swLiveHtml = ``;
-    for (let i = 0; i < liveData.live_total; i++) {
+    for (i = 0; i < liveData.live_count; i++) {
       let obj = liveData[`live_${i + 1}`];
       let temp = `
-      <div class="swiper-slide">
-        <a href="${obj.link}" class="live-link">
-          <div class="live-img">
-            <img src="images/${obj.pic}" alt="${obj.alt}" />
-          </div>
-          <div class="live-info">
-            <div class="live-info-top">
-              <span class="live-info-cate">${obj.category}</span>
-              <p class="live-info-title">
-                ${obj.title}
-              </p>
+        <div class="swiper-slide">
+          <a href="${obj.link}" class="live-link">
+            <div class="live-img">
+              <img src="images/${obj.pic}" alt="${obj.alt}" />
             </div>
-            <div class="live-info-main">
-              <p class="live-info-date">${obj.date}</p>
-              <p class="live-info-time">${obj.time}</p>
-            </div>
-            <div class="live-info-bottom clearfix">
-              <div class="live-info-thumb">
-                <img src="images/${obj.pic}" alt="${obj.alt}" />
+            <div class="live-info">
+              <div class="live-info-top">
+                <span class="live-info-cate">${obj.category}</span>
+                <p class="live-info-title">${obj.title}</p></p>
               </div>
-              <div class="live-info-desc">
-                <p class="live-info-desc-title">
-                  ${obj.desc}
-                </p>
-                <p class="live-info-desc-price">
-                  <em>${obj.ratio}%</em>
-                  <b>${obj.price}</b>원
-                </p>
+              <div class="live-info-main">
+                <p class="live-info-date">${obj.date}</p>
+                <p class="live-info-time">${obj.time}</p>
+              </div>
+              <div class="live-info-bottom clearfix">
+                <div class="live-info-thumb" ${
+                  obj.thumbImg
+                    ? "style='display:block'"
+                    : "style='display:none'"
+                }>
+                  <img src="images/${obj.thumbImg}" alt="${obj.thumbAlt}" />
+                </div>
+                <div class="live-info-desc" ${
+                  obj.descTitle
+                    ? "style='display:block'"
+                    : "style='display:none'"
+                }>
+                  <p class="live-info-desc-title">
+                    ${obj.descTitle}
+                  </p>
+                  <p class="live-info-desc-price" ${
+                    obj.ratio ? "style='display:block'" : "style='display:none'"
+                  }>
+                    <em>${obj.ratio}%</em><b>${obj.price}</b>원
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-    `;
+          </a>
+        </div>`;
       swLiveHtml += temp;
     }
 
@@ -78,7 +77,7 @@ window.addEventListener("load", function () {
         },
         1280: {
           slidesPerView: 4,
-          spaceBetween: 24,
+          spaceBetween: 27,
         },
       },
     });

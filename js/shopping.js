@@ -1,39 +1,49 @@
 /*
  * 작성자 : 김아영
  * 연락처 : kimaydev@gmail.com
- * 작성일 : 23-05-22
- * 기능 : 쇼핑몰 리스트 슬라이드 코드
- * 업데이트 : 각 쇼핑몰 리스트 목록 출력 함수화 작업
+ * 작성일 : 23-05-30
+ * 기능 : 쇼핑몰 리스트 슬라이드 코드 리팩토링
+ * 업데이트 : 각 쇼핑몰 리스트 목록 코드 fetch로 변경
  */
 window.addEventListener("load", function () {
   // Shopping Swiper
 
   // 메뉴 클릭(실행) 시 쇼핑 목록 slide 내용 변경
   function parseShopping(_menu) {
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function (event) {
-      let req = event.target;
-      if (req.readyState === XMLHttpRequest.DONE) {
-        let data = JSON.parse(req.response);
-        makeShoppingSlide(data);
-      }
-    };
-    // 1. 전달된 매개변수 _menu에 따라
-    // 2. 관련 json데이터를 불러들이고,
     if (_menu === "쎈딜") {
-      xhr.open("GET", "data/shoppingdata.json");
+      fetch("data/shoppingdata.json")
+        .then((res) => {
+          // return을 한 결과가 바로 다음의 then으로 넘어간다.
+          return res.json();
+        })
+        .then((result) => {
+          makeShoppingSlide(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else if (_menu === "베스트") {
-      xhr.open("GET", "data/shoppingdata1.json");
+      fetch("data/shoppingdata1.json")
+        .then((res) => {
+          return res.json();
+        })
+        .then((result) => {
+          makeShoppingSlide(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else if (_menu === "오늘만특가") {
-      xhr.open("GET", "data/shoppingdata2.json");
+      fetch("data/shoppingdata2.json")
+        .then((res) => res.json())
+        .then((result) => makeShoppingSlide(result))
+        .catch((err) => console.log(err));
     } else if (_menu === "어린이날") {
-      xhr.open("GET", "data/shoppingdata3.json");
-    } else if (_menu === "소담상회") {
-      xhr.open("GET", "data/shoppingdata4.json");
+      fetch("data/어린이날.json")
+        .then((res) => res.json())
+        .then((result) => makeShoppingSlide(result))
+        .catch((err) => console.log(err));
     }
-    xhr.send();
-    // 3. HTML을 만들어서
-    // 4. 슬라이드 생성
   }
   parseShopping("쎈딜");
 
@@ -44,6 +54,7 @@ window.addEventListener("load", function () {
     let swShoppingHtml = ``;
     for (let i = 0; i < _data.good_count; i++) {
       let obj = _data[`good_${i + 1}`];
+      let cate = obj.ratio;
       let temp = `
       <div class="swiper-slide">
         <a href="${obj.link}" class="good">
@@ -51,7 +62,16 @@ window.addEventListener("load", function () {
           <div class="good-info">
             <ul class="good-info-list">
               <li>
-                <b> <span>${obj.ratio}%</span> ${obj.price}원 </b>
+                <b> 
+                `;
+      if (cate) {
+        temp += `
+                  <span>${obj.ratio}%</span> 
+                  `;
+      }
+      temp += `
+                ${obj.price}원
+                </b>
               </li>
               <li>
                 <p>${obj.product}</p>
@@ -108,26 +128,18 @@ window.addEventListener("load", function () {
   }
   // 버튼 클릭 시 카테고리 변경
   const btns = document.querySelectorAll(".shopping .btns a");
-  btns[0].onclick = function (event) {
-    event.preventDefault();
-    // a 태그의 기본 동작인 href를 막는다.
-    parseShopping("쎈딜");
-  };
-  btns[1].onclick = function (event) {
-    event.preventDefault();
-    parseShopping("베스트");
-  };
-  btns[2].onclick = function (event) {
-    event.preventDefault();
-    parseShopping("오늘만특가");
-  };
-  btns[3].onclick = function (event) {
-    event.preventDefault();
-    parseShopping("어린이날");
-  };
-  btns[4].onclick = function (event) {
-    event.preventDefault();
-    parseShopping("소담상회");
-  };
+  let cateName = ["쎈딜", "베스트", "오늘만특가", "어린이날"];
+  for (let i = 0; i < cateName.length; i++) {
+    btns[i].onclick = function (event) {
+      event.preventDefault();
+      // a 태그의 기본 동작인 href를 막는다.
+      parseShopping(cateName[i]);
+      for (let j = 0; j < btns.length; j++) {
+        btns[j].classList.remove("btns-active");
+      }
+      // 버튼 포커스 class 적용
+      this.classList.add("btns-active");
+    };
+  }
 });
 // 메서드 방식으로 로드함

@@ -3,6 +3,15 @@
   사용되는 리소스가 모두 완료되고 나서 js가 실행되어야 정상적인 처리가 가능하다
 */
 window.onload = function () {
+  // 모달창 처리
+  // let body = document.querySelector("body");
+  // body.classList.add("modal-active");
+  // let modal = document.querySelector(".modal");
+  // modal.onclick = function () {
+  //   body.classList.remove("modal-active");
+  //   this.style.display = "none";
+  // };
+
   /*// 위로 이동하기
   const goTop = document.querySelector(".gotop");
   // -> 바뀌지 않는 값은 const 사용

@@ -1,33 +1,36 @@
 /*
  * 작성자 : 김아영
  * 연락처 : kimaydev@gmail.com
- * 작성일 : 23-05-22
- * 기능 : tour 리스트 슬라이드 코드
- * 업데이트 : 각 tour 리스트 목록 출력 함수화 작업
+ * 작성일 : 23-05-30
+ * 기능 : tour 탭 버튼 클릭 이벤트 코드 리팩토링
+ * 업데이트 : tour 리스트 목록 코드 fetch로 변경
  */
 window.addEventListener("load", function () {
   // tour Swiper
 
   // tour 데이터 파싱 및 슬라이드 제작
   function parseTour(_cate) {
-    const tourXhttp = new XMLHttpRequest();
-    tourXhttp.onreadystatechange = function (event) {
-      const req = event.target;
-      if (req.readyState === XMLHttpRequest.DONE) {
-        let data = JSON.parse(req.response);
-        makeTourSlide(data);
-      }
-    };
     if (_cate === "망설이면 품절") {
-      tourXhttp.open("GET", "data/tourdata.json");
+      fetch("data/tourdataJS.json")
+        .then((res) => res.json())
+        .then((result) => makeTourSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "패키지") {
-      tourXhttp.open("GET", "data/tourdata1.json");
+      fetch("data/tourdata1.json")
+        .then((res) => res.json())
+        .then((result) => makeTourSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "숙소") {
-      tourXhttp.open("GET", "data/tourdata2.json");
+      fetch("data/tourdata2.json")
+        .then((res) => res.json())
+        .then((result) => makeTourSlide(result))
+        .catch((err) => console.log(err));
     } else if (_cate === "해외숙소") {
-      tourXhttp.open("GET", "data/tourdata3.json");
+      fetch("data/tourdata3.json")
+        .then((res) => res.json())
+        .then((result) => makeTourSlide(result))
+        .catch((err) => console.log(err));
     }
-    tourXhttp.send();
   }
 
   parseTour("망설이면 품절");
@@ -113,20 +116,16 @@ window.addEventListener("load", function () {
   }
 
   let btns = document.querySelectorAll(".tour .btns a");
-  btns[0].onclick = function (event) {
-    event.preventDefault();
-    parseTour("망설이면 품절");
-  };
-  btns[1].onclick = function (event) {
-    event.preventDefault();
-    parseTour("패키지");
-  };
-  btns[2].onclick = function (event) {
-    event.preventDefault();
-    parseTour("숙소");
-  };
-  btns[3].onclick = function (event) {
-    event.preventDefault();
-    parseTour("해외숙소");
-  };
+  let cateName = ["망설이면 품절", "패키지", "숙소", "해외숙소"];
+  for (let i = 0; i < cateName.length; i++) {
+    btns[i].onclick = function (event) {
+      event.preventDefault();
+      parseTour(cateName[i]);
+      for (let j = 0; j < btns.length; j++) {
+        btns[j].classList.remove("btns-active");
+      }
+      this.classList.add("btns-active");
+    };
+  }
+  btns[0].classList.add("btns-active");
 });

@@ -1,63 +1,80 @@
 /*
  * 작성자 : 김아영
  * 연락처 : kimaydev@gmail.com
- * 작성일 : 23-05-22
- * 기능 : books 리스트 슬라이드 코드
- * 업데이트 : 각 books 리스트 목록 출력 함수화 작업
+ * 작성일 : 23-05-30
+ * 기능 :
+ * 업데이트 :
  */
 window.addEventListener("load", function () {
-  // book swiper
-
-  function parseBooks(_cate) {
-    const booksXhttp = new XMLHttpRequest();
-    booksXhttp.onreadystatechange = function (event) {
-      let req = event.target;
-      if (req.readyState === XMLHttpRequest.DONE) {
-        let data = JSON.parse(req.response);
-        makeBooksSlide(data);
-      }
-    };
-    if (_cate === "MD's Pick") {
-      booksXhttp.open("GET", "data/booksdata.json");
-    } else if (_cate === "베스트셀러") {
-      booksXhttp.open("GET", "data/booksdata1.json");
-    } else if (_cate === "신간추천") {
-      booksXhttp.open("GET", "data/booksdata2.json");
-    } else if (_cate === "특가할인") {
-      booksXhttp.open("GET", "data/booksdata3.json");
+  // 선택된 출력 리스트 인덱스
+  let showIndex = 0;
+	
+  fetch("data/books.json")
+    .then((res) => res.json())
+    .then((result) => parseBooks(result))
+    .catch((err) => console.log(err));
+  //json Data 보관
+  let jsonData;
+  // books btns
+  let btns = document.querySelector(".books .btns");
+  function parseBooks(_data) {
+    jsonData = _data;
+    // a 태그 생성
+    let btHtml = ``;
+    let dataArr = _data.books;
+    for (let i = 0; i < dataArr.length; i++) {
+      let temp = `<a href="#">${dataArr[i].catename}</a>`;
+      btHtml += temp;
     }
-    booksXhttp.send();
+    btns.innerHTML = btHtml;
+
+    let aTags = document.querySelectorAll(".books .btns a");
+    for (let i = 0; i < dataArr.length; i++) {
+      aTags[i].onclick = function (event) {
+        event.preventDefault();
+        makeList(i);
+        for (let j = 0; j < aTags.length; j++) {
+          aTags[j].classList.remove("btns-active");
+        }
+        this.classList.add("btns-active");
+      };
+      aTags[0].classList.add("btns-active");
+    }
+
+    makeList(0);
   }
-  parseBooks("MD's Pick");
+
+  // 목록 HTML 생성
   let booksSwiper;
 
-  function makeBooksSlide(_data) {
-    let swbooksHtml = ``;
-    for (let i = 0; i < _data.books_total; i++) {
-      let obj = _data[`books_${i + 1}`];
-      let temp = `
-    <div class="swiper-slide">
-      <a href="${obj.link}" class="books-link">
-        <div class="books-img">
-          <img src="images/${obj.pic}" alt="${obj.alt}" />
+  function makeList(_idx) {
+    let html = ``;
+    let listData = jsonData.books[_idx].list;
+    let listTotal = listData.length;
+    for (let i = 0; i < listTotal; i++) {
+      let obj = listData[i];
+      let temp = ` 
+        <div class="swiper-slide">
+            <a href="${obj.link}" class="books-link">
+            <div class="books-img">
+                <img src="images/${obj.img}" alt="${obj.alt}" />
+            </div>
+            <div class="books-info">
+                <p class="books-info-title">${obj.title}</p>
+                <p class="books-info-price"><em>${obj.price}</em>원</p>
+            </div>
+            </a>
         </div>
-        <div class="books-info">
-          <p class="books-info-title">${obj.title}</p>
-          <p class="books-info-price"><em>${obj.price}</em>원</p>
-        </div>
-      </a>
-    </div>
-  `;
-      swbooksHtml += temp;
+      `;
+      html += temp;
     }
 
-    let swbooksWrapper = document.querySelector(".sw-books .swiper-wrapper");
-    swbooksWrapper.innerHTML = swbooksHtml;
+    let swWrap = document.querySelector(".sw-books .swiper-wrapper");
+    swWrap.innerHTML = html;
 
     if (booksSwiper) {
       booksSwiper.destroy();
     }
-
     booksSwiper = new Swiper(".sw-books", {
       slidesPerView: 3,
       grid: {
@@ -89,21 +106,4 @@ window.addEventListener("load", function () {
       },
     });
   }
-  let btns = document.querySelectorAll(".books .btns a");
-  btns[0].onclick = function (event) {
-    event.preventDefault();
-    parseBooks("MD's Pick");
-  };
-  btns[1].onclick = function (event) {
-    event.preventDefault();
-    parseBooks("베스트셀러");
-  };
-  btns[2].onclick = function (event) {
-    event.preventDefault();
-    parseBooks("신간추천");
-  };
-  btns[3].onclick = function (event) {
-    event.preventDefault();
-    parseBooks("특가할인");
-  };
 });

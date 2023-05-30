@@ -1,0 +1,204 @@
+{
+  "goods": [
+    {
+      "catename": "쎈딜",
+      "list": [
+        {
+          "link": "#",
+          "pic": "ssendil1.jpg",
+          "product": "제라 라곰 폴딩 캠핑체어 캠핑의자 옥스포드 원단",
+          "ratio": 20,
+          "price": "19,900"
+        },
+        {
+          "link": "#",
+          "pic": "ssendil2.jpg",
+          "product": "켈로그 프링글스 슈퍼핫 할라피뇨파퍼 110g 4개+4개 초특가/감자칩/간식/스낵/포카칩/감자/과자/감자스낵",
+          "ratio": 63,
+          "price": "9,800"
+        },
+        {
+          "link": "#",
+          "pic": "ssendil3.jpg",
+          "product": "엡손 L3256 무한잉크 무선 복합기 프린터 잉크포함",
+          "ratio": 3,
+          "price": "169,000"
+        },
+        {
+          "link": "#",
+          "pic": "ssendil4.jpg",
+          "product": "[앱1천+출국전뷰티30%] 헤드앤숄더 가려운두피/쿨멘솔 샴푸 외 850ml 3개 + 미니샴푸 1개증정",
+          "ratio": 30,
+          "price": "21,980"
+        },
+        {
+          "link": "#",
+          "pic": "ssendil5.jpg",
+          "product": "씨그램 라벨프리 450ml 20입(레몬/라임/플레인/피치)",
+          "ratio": 22,
+          "price": "11,020"
+        },
+        {
+          "link": "#",
+          "pic": "ssendil6.jpg",
+          "product": "이블랑 시어서커/인견100%/피그먼트 여름침구!",
+          "ratio": 28,
+          "price": "8,900"
+        }
+      ]
+    },
+    {
+      "catename": "베스트",
+      "list": [
+        {
+          "link": "#",
+          "pic": "shopping_best_1.jpg",
+          "product": "하남쭈꾸미 350g, 500g / 3팩, 5팩 골라담기",
+          "ratio": "",
+          "price": "29,700"
+        },
+        {
+          "link": "#",
+          "pic": "shopping_best_2.png",
+          "product": "배상면주가 느린마을막걸리 750ml x 5입",
+          "ratio": 11,
+          "price": "14,900"
+        },
+        {
+          "link": "#",
+          "pic": "shopping_best_3.jpg",
+          "product": "제주 삼다수 무라벨 2L 6병 (유/무라벨 랜덤발송)",
+          "ratio": 8,
+          "price": "6,420"
+        },
+        {
+          "link": "#",
+          "pic": "shopping_best_4.jpg",
+          "product": "[설빙] 인절미설빙",
+          "ratio": "",
+          "price": "8,900"
+        },
+        {
+          "link": "#",
+          "pic": "shopping_best_5.jpg",
+          "product": "[빠른예약/다운쿠폰] 워터클린 에어컨 청소 [구매 후 예약 필수] 얼리버드 특가",
+          "ratio": 23,
+          "price": "49,890"
+        },
+        {
+          "link": "#",
+          "pic": "shopping_best_6.jpg",
+          "product": "[경기맛기행]  푸드조아 22년산 특등급 아산 삼광쌀 10kg",
+          "ratio": "",
+          "price": "30,810"
+        }
+      ]
+    },
+    {
+      "catename": "오늘만특가",
+      "list": [
+        {
+          "link": "#",
+          "pic": "mhappy1.jpg",
+          "product": "[다운로드쿠폰] 질레트 프로글라이드젤 퓨어 스포츠 170g 2개",
+          "ratio": 28,
+          "price": "8,900"
+        },
+        {
+          "link": "#",
+          "pic": "mhappy2.jpg",
+          "product": "[공식] 이지드롭 변기크리너 블루핸들1개+리필1팩 外",
+          "ratio": 20,
+          "price": "7,080"
+        },
+        {
+          "link": "#",
+          "pic": "mhappy3.jpg",
+          "product": "홈키파 수성 에어졸 500ml x3개",
+          "ratio": 38,
+          "price": "6,980"
+        },
+        {
+          "link": "#",
+          "pic": "mhappy4.jpg",
+          "product": "이블랑 시어서커/인견100%/피그먼트 여름 침구!",
+          "ratio": 28,
+          "price": "8,900"
+        },
+        {
+          "link": "#",
+          "pic": "mhappy5.jpg",
+          "product": "[가정의 달 특가] 휴럼 요거베리 플레인 요거트 스타터 2gx10포 3박스",
+          "ratio": 39,
+          "price": "18,510"
+        },
+        {
+          "link": "#",
+          "pic": "mhappy6.jpg",
+          "product": "매직캔 이지캔 호환 그린리필 280 250 220 녹색",
+          "ratio": 12,
+          "price": "9,000"
+        }
+      ]
+    },
+    {
+      "catename": "어린이날",
+      "list": [
+        {
+          "link": "#",
+          "pic": "good1.png",
+          "product": "맥 MAC 립스틱",
+          "ratio": 5,
+          "price": "11,950"
+        },
+        {
+          "link": "#",
+          "pic": "good2.jpg",
+          "product": "[장터할매]2023년 햇양파 중품/짱아치용 특품 3kg~10kg",
+          "ratio": 5,
+          "price": "11,950"
+        },
+        {
+          "link": "#",
+          "pic": "good3.jpg",
+          "product": " QCY GTS 스마트워치 2세대 블랙/ 블루투스 통화가능/실리콘 스트랩 메탈 스트랩 TPU 보호필름 추가구매",
+          "ratio": 5,
+          "price": "11,950"
+        }
+      ]
+    },
+    {
+      "catename": "소담상회",
+      "list": [
+        {
+          "link": "#",
+          "pic": "good1.png",
+          "product": "맥 MAC 립스틱",
+          "ratio": 5,
+          "price": "11,950"
+        },
+        {
+          "link": "#",
+          "pic": "good2.jpg",
+          "product": "[장터할매]2023년 햇양파 중품/짱아치용 특품 3kg~10kg",
+          "ratio": 5,
+          "price": "11,950"
+        },
+        {
+          "link": "#",
+          "pic": "good3.jpg",
+          "product": " QCY GTS 스마트워치 2세대 블랙/ 블루투스 통화가능/실리콘 스트랩 메탈 스트랩 TPU 보호필름 추가구매",
+          "ratio": 5,
+          "price": "11,950"
+        },
+        {
+          "link": "#",
+          "pic": "good4.jpg",
+          "product": "[베베당] 유기농 롱스틱 골고루 10봉 세트",
+          "ratio": 5,
+          "price": "11,950"
+        }
+      ]
+    }
+  ]
+}
